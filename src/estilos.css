@@ -1,0 +1,56 @@
+body {
+    font-family: sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+main {
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+}
+
+form {
+    display: flex;
+    gap: 8px;
+}
+
+form input {
+    flex: 1;
+    padding: 6px;
+}
+
+.filtros {
+    margin: 12px 0;
+    display: flex;
+    gap: 6px;
+}
+
+.filtros .activo {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+
+li span {
+    flex: 1;
+}
+
+li.hecha span {
+    text-decoration: line-through;
+    color: gray;
+}
