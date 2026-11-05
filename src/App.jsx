@@ -61,6 +61,22 @@ function Filtros({ filtro, dispatch }) {
 
 // COMPONENTE TAREAS
 function Tarea({ tarea, dispatch }) {
+    // FUNCION PARA GUARDAR LA TAREA A EDITAR
+    function guardar(evento) {
+        const texto = evento.target.textContent.trim(); // EXTRAE EL TEXTO QUE EL USUARIO TERMINO DE ESCRIBIR
+        evento.target.textContent = tarea.texto; // RESTAURA EL TEXTO VISUAL POR EL QUE SE EXTRAJO
+        dispatch({ tipo: "EDITAR", id: tarea.id, texto }); // LLAMA A LA ACCION DE EDITAR PARA QUE ACTUALIZA LA TAREA
+    }
+
+    // FUNCION PARA EL CONTROL DE TECLADO
+    function alPresionarTecla(evento) {
+        // DETECTA SI SE PRESIONA ENTER
+        if (evento.key === "Enter") {
+            evento.preventDefault(); // EVITA QUE SE RECARGUE LA PAGINA
+            evento.target.blur(); // OBLIGA AL ELEMENTO A PERDER EL FOCO
+        }
+    }
+
     return (
         <li className={tarea.hecha ? "hecha" : ""}>
             <input
@@ -68,7 +84,9 @@ function Tarea({ tarea, dispatch }) {
                 checked={tarea.hecha}
                 onChange={() => dispatch({ tipo: "ALTERNAR", id: tarea.id })}
             />
-            <span>{tarea.texto}</span>
+            <span contentEditable= "true" onKeyDown={alPresionarTecla} onBlur={guardar}>
+                {tarea.texto}
+            </span>
             <button onClick={() => dispatch({ tipo: "BORRAR", id: tarea.id })}>Borrar</button>
         </li>
     );
