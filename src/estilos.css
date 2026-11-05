@@ -54,3 +54,7 @@ li.hecha span {
     text-decoration: line-through;
     color: gray;
 }
+
+li span:focus {
+    outline: 1px solid gray;
+}
