@@ -7,6 +7,8 @@ const estadoInicial = {
     texto: "", // STRING PARA DETECTAR LO QUE ESTRIBE EL USUARIO
     filtro: "todas", // UN SELECTOR PARA FILTRAR LAS TAREAS (POR DEFECTO EN TODAS)
     siguienteId: 1, // UN CONTADOR NUMERICO INCREMENTAL
+   // idEditado: null,
+    textoEditado: ""
 };
 
 // FUNCION PARA CALCULAR Y RETORNAR UN NUEVO ESTADO
@@ -56,6 +58,18 @@ function reducer(estado, accion) {
         // CASO FILTRAR
         case "FILTRAR":
             return { ...estado, filtro: accion.filtro }; // ACTUALIZA LA PROPIEDAD DE FILTRO (COMPLETADAS, PENDIENTES O TODAS)
+        
+        // CASO EDITAR
+        case "EDITAR":
+            return {
+                ...estado, // A LA COPIA DE LAS PROPS RECIBIDAS =
+                // RECORRE EL ARRAY DE TAREAS
+                tareas: estado.tareas.map((tarea) =>
+                    // SI EL ID COINCIDE CON EL ID DE LA ACCION RECIBIDA -> GUARDA LA TAREA EDITADA
+                    tarea.id === accion.id ? { ...tarea, texto: accion.texto } : tarea
+                ),
+            };
+
         
         // SI LLEGA CUALQUIER OTRA ACCION DESCONOCIDA
         default:
